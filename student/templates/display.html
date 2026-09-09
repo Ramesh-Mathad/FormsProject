@@ -1,0 +1,187 @@
+{% extends 'base.html' %}
+{% block title %}Students · Campus Portal{% endblock title %}
+{% block nav_display %}active{% endblock %}
+{% load static %}
+{% block content %}
+<div class="container cp-page">
+
+    <div class="d-flex flex-wrap justify-content-between align-items-end gap-3 mb-4 cp-animate">
+        <div>
+            <div class="cp-eyebrow">Student records</div>
+            <h1 class="cp-title mb-1">All Students</h1>
+            <p class="cp-subtitle">Browse, search and manage every enrolled student.</p>
+        </div>
+        <a href="{% url 'insert' %}" class="btn btn-cp-primary">
+            <i class="bi bi-plus-lg me-1"></i> Add Student
+        </a>
+    </div>
+
+    {% if stud %}
+    <div class="row g-3 mb-4 cp-animate cp-animate-delay-1">
+        <div class="col-6 col-lg-3">
+            <div class="cp-stat">
+                <div class="cp-stat-icon" style="background:rgba(124,92,255,0.15); color:#a78bfa;"><i class="bi bi-people-fill"></i></div>
+                <div>
+                    <div class="cp-stat-value">{{ stud|length }}</div>
+                    <div class="cp-stat-label">Total students</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 col-lg-3">
+            <div class="cp-stat">
+                <div class="cp-stat-icon" style="background:rgba(52,211,153,0.15); color:#34d399;"><i class="bi bi-code-slash"></i></div>
+                <div>
+                    <div class="cp-stat-value" id="statPFS">0</div>
+                    <div class="cp-stat-label">Python Full Stack</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 col-lg-3">
+            <div class="cp-stat">
+                <div class="cp-stat-icon" style="background:rgba(251,191,36,0.15); color:#fbbf24;"><i class="bi bi-cup-hot-fill"></i></div>
+                <div>
+                    <div class="cp-stat-value" id="statJFS">0</div>
+                    <div class="cp-stat-label">Java Full Stack</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 col-lg-3">
+            <div class="cp-stat">
+                <div class="cp-stat-icon" style="background:rgba(34,211,238,0.15); color:#22d3ee;"><i class="bi bi-stack"></i></div>
+                <div>
+                    <div class="cp-stat-value" id="statMERN">0</div>
+                    <div class="cp-stat-label">MERN Stack</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="d-flex flex-wrap gap-3 align-items-center justify-content-between mb-4 cp-animate cp-animate-delay-2">
+        <div class="cp-search-wrap flex-grow-1" style="max-width: 380px;">
+            <i class="bi bi-search"></i>
+            <input type="text" id="studSearch" class="form-control cp-form-control" placeholder="Search by name or roll no...">
+        </div>
+        <div class="d-flex gap-2 flex-wrap">
+            <button class="cp-filter-chip active" data-course="all">All</button>
+            <button class="cp-filter-chip" data-course="PFS">Python Full Stack</button>
+            <button class="cp-filter-chip" data-course="JFS">Java Full Stack</button>
+            <button class="cp-filter-chip" data-course="MERN">MERN Stack</button>
+        </div>
+    </div>
+
+    <div class="row g-4" id="studGrid">
+        {% for s in stud %}
+        <div class="col-sm-6 col-lg-4 col-xl-3 stud-item" data-name="{{ s.name|lower }}" data-roll="{{ s.roll_no }}" data-course="{{ s.course }}">
+            <div class="stud-card">
+                <div class="stud-card-cover">
+                    <div class="stud-avatar-wrap">
+                        {% if s.image %}
+                        <img src="{{ s.image.url }}" alt="{{ s.name }}">
+                        {% else %}
+                        <div class="stud-avatar-initials">{{ s.name|slice:":1" }}</div>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="stud-card-body">
+                    <div class="stud-name">{{ s.name }}</div>
+                    <div class="stud-roll">Roll No. {{ s.roll_no }}</div>
+
+                    <span class="course-badge {% if s.course == 'PFS' %}pfs{% elif s.course == 'JFS' %}jfs{% else %}mern{% endif %}">
+                        <i class="bi bi-mortarboard"></i> {{ s.get_course_display }}
+                    </span>
+
+                    <div class="stud-meta-row">
+                        <i class="bi bi-envelope"></i>
+                        <span class="text-truncate">{{ s.email }}</span>
+                    </div>
+                    <div class="stud-meta-row">
+                        <i class="bi bi-geo-alt"></i>
+                        <span>{{ s.address|truncatechars:60 }}</span>
+                    </div>
+
+                    <div class="stud-card-actions">
+                        <a href="{% url 'update' s.id %}" class="btn-icon-sm flex-fill" title="Edit">
+                            <i class="bi bi-pencil"></i>
+                        </a>
+                        <a href="{% url 'delete' s.id %}" class="btn-icon-sm danger flex-fill" title="Delete">
+                            <i class="bi bi-trash3"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="cp-empty d-none" id="noResults">
+        <i class="bi bi-search"></i>
+        <h4 class="cp-title" style="font-size:1.2rem;">No matches found</h4>
+        <p class="cp-subtitle">Try a different name, roll number, or filter.</p>
+    </div>
+
+    {% else %}
+    <div class="cp-card cp-animate cp-animate-delay-1">
+        <div class="cp-empty">
+            <i class="bi bi-people"></i>
+            <h4 class="cp-title" style="font-size:1.3rem;">No students yet</h4>
+            <p class="cp-subtitle mb-4">Get started by adding your first student record.</p>
+            <a href="{% url 'insert' %}" class="btn btn-cp-primary">
+                <i class="bi bi-plus-lg me-1"></i> Add Student
+            </a>
+        </div>
+    </div>
+    {% endif %}
+
+</div>
+{% endblock content %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    var items = Array.prototype.slice.call(document.querySelectorAll('.stud-item'));
+    var searchInput = document.getElementById('studSearch');
+    var chips = document.querySelectorAll('.cp-filter-chip');
+    var noResults = document.getElementById('noResults');
+    var activeCourse = 'all';
+
+    var counts = { PFS: 0, JFS: 0, MERN: 0 };
+    items.forEach(function (item) {
+        var c = item.getAttribute('data-course');
+        if (counts[c] !== undefined) counts[c]++;
+    });
+    var pfsEl = document.getElementById('statPFS');
+    var jfsEl = document.getElementById('statJFS');
+    var mernEl = document.getElementById('statMERN');
+    if (pfsEl) pfsEl.textContent = counts.PFS;
+    if (jfsEl) jfsEl.textContent = counts.JFS;
+    if (mernEl) mernEl.textContent = counts.MERN;
+
+    function applyFilters() {
+        var q = (searchInput.value || '').toLowerCase().trim();
+        var visibleCount = 0;
+        items.forEach(function (item) {
+            var name = item.getAttribute('data-name') || '';
+            var roll = item.getAttribute('data-roll') || '';
+            var course = item.getAttribute('data-course') || '';
+            var matchesText = !q || name.indexOf(q) !== -1 || roll.indexOf(q) !== -1;
+            var matchesCourse = activeCourse === 'all' || course === activeCourse;
+            var visible = matchesText && matchesCourse;
+            item.style.display = visible ? '' : 'none';
+            if (visible) visibleCount++;
+        });
+        noResults.classList.toggle('d-none', visibleCount !== 0);
+    }
+
+    if (searchInput) searchInput.addEventListener('input', applyFilters);
+
+    chips.forEach(function (chip) {
+        chip.addEventListener('click', function () {
+            chips.forEach(function (c) { c.classList.remove('active'); });
+            chip.classList.add('active');
+            activeCourse = chip.getAttribute('data-course');
+            applyFilters();
+        });
+    });
+});
+</script>
+{% endblock extra_js %}

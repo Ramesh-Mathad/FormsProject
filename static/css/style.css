@@ -1,0 +1,479 @@
+/* =====================================================
+   Campus Portal — Premium UI Theme
+   ===================================================== */
+
+:root {
+  --bg-0: #0b0e1a;
+  --bg-1: #10142a;
+  --bg-2: #161b36;
+  --surface: rgba(255, 255, 255, 0.055);
+  --surface-strong: rgba(255, 255, 255, 0.09);
+  --border: rgba(255, 255, 255, 0.10);
+  --border-soft: rgba(255, 255, 255, 0.06);
+  --text-hi: #f5f6fb;
+  --text-mid: #b7bdd6;
+  --text-low: #7d84a6;
+  --accent-1: #7c5cff;
+  --accent-2: #22d3ee;
+  --accent-3: #f472b6;
+  --gradient-brand: linear-gradient(135deg, #7c5cff 0%, #22d3ee 100%);
+  --gradient-warm: linear-gradient(135deg, #f472b6 0%, #7c5cff 100%);
+  --success: #34d399;
+  --danger: #fb7185;
+  --danger-2: #f43f5e;
+  --radius-lg: 22px;
+  --radius-md: 14px;
+  --radius-sm: 10px;
+  --shadow-soft: 0 20px 50px -20px rgba(0, 0, 0, 0.55);
+  --shadow-glow: 0 0 0 1px rgba(124, 92, 255, 0.15), 0 20px 60px -15px rgba(124, 92, 255, 0.35);
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  min-height: 100%;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  color: var(--text-hi);
+  background:
+    radial-gradient(1100px 600px at 8% -10%, rgba(124, 92, 255, 0.25), transparent 60%),
+    radial-gradient(900px 500px at 110% 10%, rgba(34, 211, 238, 0.16), transparent 55%),
+    radial-gradient(800px 500px at 50% 120%, rgba(244, 114, 182, 0.12), transparent 55%),
+    var(--bg-0);
+  background-attachment: fixed;
+  min-height: 100vh;
+  letter-spacing: -0.01em;
+}
+
+h1, h2, h3, h4, h5, .brand-font {
+  font-family: 'Poppins', 'Inter', sans-serif;
+  letter-spacing: -0.02em;
+}
+
+::selection { background: rgba(124, 92, 255, 0.35); }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(124, 92, 255, 0.35); border-radius: 10px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(124, 92, 255, 0.55); }
+
+/* =================== Navbar =================== */
+.cp-navbar {
+  background: rgba(13, 16, 33, 0.72);
+  backdrop-filter: blur(18px) saturate(140%);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+  border-bottom: 1px solid var(--border-soft);
+  padding: 0.9rem 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.cp-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  font-weight: 700;
+  font-size: 1.15rem;
+  color: var(--text-hi) !important;
+  text-decoration: none;
+}
+
+.cp-brand-mark {
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  background: var(--gradient-brand);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  box-shadow: 0 8px 20px -6px rgba(124, 92, 255, 0.6);
+  flex-shrink: 0;
+}
+
+.cp-nav-link {
+  color: var(--text-mid) !important;
+  font-weight: 500;
+  font-size: 0.92rem;
+  padding: 0.5rem 0.9rem !important;
+  border-radius: 10px;
+  transition: all 0.2s ease;
+}
+
+.cp-nav-link:hover, .cp-nav-link.active {
+  color: var(--text-hi) !important;
+  background: var(--surface);
+}
+
+/* =================== Layout helpers =================== */
+.cp-page {
+  padding: 2.75rem 0 4rem;
+  min-height: calc(100vh - 76px);
+}
+
+.cp-eyebrow {
+  text-transform: uppercase;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  color: var(--accent-2);
+  margin-bottom: 0.5rem;
+}
+
+.cp-title {
+  font-weight: 700;
+  font-size: 2rem;
+  color: var(--text-hi);
+  margin-bottom: 0.35rem;
+}
+
+.cp-subtitle {
+  color: var(--text-mid);
+  font-size: 0.98rem;
+  margin-bottom: 0;
+}
+
+/* =================== Glass Card =================== */
+.cp-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: var(--shadow-soft);
+}
+
+.cp-card-pad { padding: 2.25rem; }
+
+/* =================== Stat pills (display page) =================== */
+.cp-stat {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 1.15rem 1.35rem;
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+}
+
+.cp-stat-icon {
+  width: 46px;
+  height: 46px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.15rem;
+  flex-shrink: 0;
+}
+
+.cp-stat-value {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  font-size: 1.45rem;
+  line-height: 1.1;
+  color: var(--text-hi);
+}
+
+.cp-stat-label {
+  color: var(--text-low);
+  font-size: 0.78rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+/* =================== Forms =================== */
+.cp-field-label {
+  font-size: 0.83rem;
+  font-weight: 600;
+  color: var(--text-mid);
+  margin-bottom: 0.4rem;
+  display: block;
+}
+
+.cp-form .form-control,
+.cp-form .form-select {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border);
+  color: var(--text-hi);
+  border-radius: var(--radius-sm);
+  padding: 0.72rem 0.95rem;
+  font-size: 0.95rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.cp-form textarea.form-control { min-height: 96px; resize: vertical; }
+
+.cp-form .form-control::placeholder { color: var(--text-low); }
+
+.cp-form .form-control:focus,
+.cp-form .form-select:focus {
+  background: rgba(255, 255, 255, 0.065);
+  border-color: rgba(124, 92, 255, 0.55);
+  box-shadow: 0 0 0 4px rgba(124, 92, 255, 0.16);
+  color: var(--text-hi);
+}
+
+.cp-form select.form-select option { background: #171b38; color: var(--text-hi); }
+
+.cp-form input[type="file"].form-control {
+  padding: 0.55rem 0.8rem;
+}
+.cp-form input[type="file"].form-control::file-selector-button {
+  background: var(--gradient-brand);
+  border: none;
+  color: white;
+  padding: 0.4rem 0.85rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.82rem;
+  margin-right: 0.85rem;
+  cursor: pointer;
+}
+
+.cp-error-text {
+  color: var(--danger);
+  font-size: 0.8rem;
+  margin-top: 0.35rem;
+  margin-bottom: 0;
+}
+
+/* =================== Buttons =================== */
+.btn-cp-primary {
+  background: var(--gradient-brand);
+  border: none;
+  color: #fff;
+  font-weight: 600;
+  padding: 0.68rem 1.5rem;
+  border-radius: var(--radius-sm);
+  box-shadow: 0 12px 30px -10px rgba(124, 92, 255, 0.6);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
+}
+.btn-cp-primary:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.08);
+  box-shadow: 0 16px 36px -10px rgba(124, 92, 255, 0.7);
+  color: #fff;
+}
+.btn-cp-primary:active { transform: translateY(0); }
+
+.btn-cp-outline {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-mid);
+  font-weight: 600;
+  padding: 0.66rem 1.4rem;
+  border-radius: var(--radius-sm);
+  transition: all 0.15s ease;
+}
+.btn-cp-outline:hover {
+  color: var(--text-hi);
+  background: var(--surface);
+  border-color: rgba(255, 255, 255, 0.22);
+}
+
+.btn-cp-danger {
+  background: linear-gradient(135deg, #fb7185 0%, #f43f5e 100%);
+  border: none;
+  color: #fff;
+  font-weight: 600;
+  padding: 0.68rem 1.5rem;
+  border-radius: var(--radius-sm);
+  box-shadow: 0 12px 30px -10px rgba(244, 63, 94, 0.55);
+  transition: transform 0.15s ease, filter 0.15s ease;
+}
+.btn-cp-danger:hover { transform: translateY(-1px); filter: brightness(1.08); color: #fff; }
+
+.btn-icon-sm {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text-mid);
+  transition: all 0.15s ease;
+}
+.btn-icon-sm:hover { color: var(--text-hi); background: var(--surface-strong); }
+.btn-icon-sm.danger:hover { color: var(--danger); border-color: rgba(244, 63, 94, 0.4); background: rgba(244, 63, 94, 0.1); }
+
+/* =================== Student Cards (display grid) =================== */
+.stud-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.stud-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(124, 92, 255, 0.35);
+  box-shadow: var(--shadow-glow);
+}
+
+.stud-card-cover {
+  height: 84px;
+  background: var(--gradient-brand);
+  position: relative;
+}
+
+.stud-avatar-wrap {
+  position: absolute;
+  left: 1.4rem;
+  bottom: -32px;
+  width: 68px;
+  height: 68px;
+  border-radius: 18px;
+  border: 3px solid var(--bg-1);
+  overflow: hidden;
+  background: var(--bg-2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 20px -6px rgba(0, 0, 0, 0.5);
+}
+.stud-avatar-wrap img { width: 100%; height: 100%; object-fit: cover; }
+.stud-avatar-initials {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: #fff;
+  background: var(--gradient-warm);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.stud-card-body { padding: 2.6rem 1.4rem 1.4rem; flex: 1; display: flex; flex-direction: column; }
+
+.stud-name { font-weight: 700; font-size: 1.08rem; color: var(--text-hi); margin-bottom: 0.15rem; }
+.stud-roll { color: var(--text-low); font-size: 0.82rem; margin-bottom: 0.9rem; }
+
+.stud-meta-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.55rem;
+  font-size: 0.85rem;
+  color: var(--text-mid);
+  margin-bottom: 0.5rem;
+}
+.stud-meta-row i { color: var(--accent-2); margin-top: 0.15rem; flex-shrink: 0; }
+
+.course-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 0.3rem 0.65rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  margin-bottom: 1rem;
+  width: fit-content;
+}
+.course-badge.pfs { color: #34d399; background: rgba(52, 211, 153, 0.12); border-color: rgba(52, 211, 153, 0.3); }
+.course-badge.jfs { color: #fbbf24; background: rgba(251, 191, 36, 0.12); border-color: rgba(251, 191, 36, 0.3); }
+.course-badge.mern { color: #22d3ee; background: rgba(34, 211, 238, 0.12); border-color: rgba(34, 211, 238, 0.3); }
+
+.stud-card-actions {
+  margin-top: auto;
+  display: flex;
+  gap: 0.55rem;
+  padding-top: 0.9rem;
+  border-top: 1px solid var(--border-soft);
+}
+
+/* =================== Empty state =================== */
+.cp-empty {
+  text-align: center;
+  padding: 4.5rem 2rem;
+  color: var(--text-mid);
+}
+.cp-empty i { font-size: 2.6rem; color: var(--accent-1); opacity: 0.8; margin-bottom: 1rem; }
+
+/* =================== Toolbar / search =================== */
+.cp-search-wrap { position: relative; }
+.cp-search-wrap i {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-low);
+}
+.cp-search-wrap .form-control { padding-left: 2.6rem; }
+
+.cp-filter-chip {
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text-mid);
+  border-radius: 999px;
+  padding: 0.45rem 1rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  transition: all 0.15s ease;
+}
+.cp-filter-chip.active, .cp-filter-chip:hover {
+  color: #fff;
+  background: var(--gradient-brand);
+  border-color: transparent;
+}
+
+/* =================== Danger / delete confirm =================== */
+.cp-danger-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 18px;
+  background: rgba(244, 63, 94, 0.12);
+  border: 1px solid rgba(244, 63, 94, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+  color: var(--danger);
+  margin: 0 auto 1.3rem;
+}
+
+/* =================== Fade-in animation =================== */
+@keyframes cpFadeUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.cp-animate { animation: cpFadeUp 0.5s ease both; }
+.cp-animate-delay-1 { animation-delay: 0.06s; }
+.cp-animate-delay-2 { animation-delay: 0.12s; }
+
+/* =================== Footer =================== */
+.cp-footer {
+  border-top: 1px solid var(--border-soft);
+  color: var(--text-low);
+  font-size: 0.82rem;
+  padding: 1.5rem 0;
+  text-align: center;
+}
+
+/* =================== Alerts / messages =================== */
+.cp-alert {
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(244, 63, 94, 0.35);
+  background: rgba(244, 63, 94, 0.1);
+  color: #fecdd3;
+  padding: 0.85rem 1.1rem;
+  font-size: 0.9rem;
+}
+
+@media (max-width: 767.98px) {
+  .cp-title { font-size: 1.6rem; }
+  .cp-card-pad { padding: 1.5rem; }
+}

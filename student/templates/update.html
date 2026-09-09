@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% block title %}Edit Student · Campus Portal{% endblock title %}
+{% block content %}
+<div class="container cp-page">
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-xl-7">
+
+            <div class="mb-4 cp-animate">
+                <a href="{% url 'display' %}" class="text-decoration-none cp-subtitle">
+                    <i class="bi bi-arrow-left me-1"></i> Back to students
+                </a>
+            </div>
+
+            {% if error %}
+            <div class="cp-card cp-card-pad text-center cp-animate">
+                <div class="cp-danger-icon"><i class="bi bi-exclamation-triangle"></i></div>
+                <h3 class="cp-title">{{ error }}</h3>
+                <a href="{% url 'display' %}" class="btn btn-cp-primary mt-3">Back to students</a>
+            </div>
+            {% else %}
+
+            <div class="mb-4 cp-animate">
+                <div class="cp-eyebrow">Editing record</div>
+                <h1 class="cp-title">Update {{ student.name }}</h1>
+                <p class="cp-subtitle">Make changes and save to update this student's record.</p>
+            </div>
+
+            <div class="cp-card cp-card-pad cp-animate cp-animate-delay-1">
+
+                {% if student.image %}
+                <div class="d-flex align-items-center gap-3 mb-4 pb-4" style="border-bottom:1px solid var(--border-soft);">
+                    <div class="stud-avatar-wrap" style="position:static; width:64px; height:64px; border-radius:16px;">
+                        <img src="{{ student.image.url }}" alt="{{ student.name }}">
+                    </div>
+                    <div>
+                        <div class="stud-name mb-0">Current photo</div>
+                        <div class="stud-roll mb-0">Upload a new image below to replace it</div>
+                    </div>
+                </div>
+                {% endif %}
+
+                <form method="post" enctype="multipart/form-data" class="cp-form">
+                    {% csrf_token %}
+                    <div class="row g-4">
+                        {% for field in form %}
+                            <div class="col-12 {% if field.name == 'name' or field.name == 'roll_no' or field.name == 'course' or field.name == 'email' %}col-md-6{% endif %}">
+                                <label class="cp-field-label">{{ field.label }}</label>
+                                {{ field }}
+                                {% if field.errors %}
+                                <p class="cp-error-text"><i class="bi bi-exclamation-circle me-1"></i>{{ field.errors.0 }}</p>
+                                {% endif %}
+                            </div>
+                        {% endfor %}
+                    </div>
+
+                    <div class="d-flex gap-3 mt-5 flex-wrap">
+                        <button type="submit" class="btn btn-cp-primary">
+                            <i class="bi bi-check2-circle me-1"></i> Save Changes
+                        </button>
+                        <a href="{% url 'display' %}" class="btn btn-cp-outline">Cancel</a>
+                    </div>
+                </form>
+            </div>
+            {% endif %}
+
+        </div>
+    </div>
+</div>
+{% endblock content %}

@@ -1,0 +1,25 @@
+{%extends 'base.html' %}
+{%block title%}
+title
+{%endblock title%}
+{%block content%}
+<center>
+
+    <form method="post" enctype="multipart/form-data">
+        {%csrf_token%}
+        <input type="text" name="name" id="" placeholder="Enter name:" value="{{student.name}}"><br>
+        <input type="file" name="image" id="" placeholder="Enter name:"><br>
+        <input type="number" name="roll_no" id="" placeholder="Enter roll_no:"value="{{student.roll_no}}"><br>
+        <textarea name="address" id="" placeholder="Enter address:">{{ student.address }}</textarea><br>
+        <label for="course">Select Your Course</label><br>
+        <input type="radio" name="course" id="" value="JFS">Java Full Stack<br>
+        <input type="radio" name="course" id=""value="PFS">Python Full Stack<br>
+        <input type="radio" name="course" id=""value="MERN">MERN Stack<br>
+        <input type="email" name="email" id="" placeholder="Enter email:"value="{{student.email}}"><br>
+        <button type="submit">submit</button>
+    </form>
+    <p>{{ message }}</p>
+</center>
+
+
+{%endblock content%}

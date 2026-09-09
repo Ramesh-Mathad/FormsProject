@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block title %}Add Student · Campus Portal{% endblock title %}
+{% block nav_display %}{% endblock %}
+{% block content %}
+<div class="container cp-page">
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-xl-7">
+
+            <div class="mb-4 cp-animate">
+                <a href="{% url 'display' %}" class="text-decoration-none cp-subtitle">
+                    <i class="bi bi-arrow-left me-1"></i> Back to students
+                </a>
+            </div>
+
+            <div class="mb-4 cp-animate">
+                <div class="cp-eyebrow">New record</div>
+                <h1 class="cp-title">Add a student</h1>
+                <p class="cp-subtitle">Fill in the details below to enroll a new student into the system.</p>
+            </div>
+
+            <div class="cp-card cp-card-pad cp-animate cp-animate-delay-1">
+                <form method="post" enctype="multipart/form-data" class="cp-form">
+                    {% csrf_token %}
+
+                    {% if message %}
+                    <div class="cp-alert mb-4"><i class="bi bi-exclamation-triangle me-1"></i> {{ message }}</div>
+                    {% endif %}
+
+                    <div class="row g-4">
+                        {% for field in form %}
+                            <div class="col-12 {% if field.name == 'name' or field.name == 'roll_no' or field.name == 'course' or field.name == 'email' %}col-md-6{% endif %}">
+                                <label class="cp-field-label">{{ field.label }}</label>
+                                {{ field }}
+                                {% if field.errors %}
+                                <p class="cp-error-text"><i class="bi bi-exclamation-circle me-1"></i>{{ field.errors.0 }}</p>
+                                {% endif %}
+                            </div>
+                        {% endfor %}
+                    </div>
+
+                    <div class="d-flex gap-3 mt-5 flex-wrap">
+                        <button type="submit" class="btn btn-cp-primary">
+                            <i class="bi bi-check2-circle me-1"></i> Save Student
+                        </button>
+                        <a href="{% url 'display' %}" class="btn btn-cp-outline">Cancel</a>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock content %}

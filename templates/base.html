@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Campus Portal{% endblock title %}</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+
+    {% load static %}
+    <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'vendor/bootstrap-icons/bootstrap-icons.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg cp-navbar">
+        <div class="container">
+            <a class="cp-brand" href="{% url 'display' %}">
+                <span class="cp-brand-mark"><i class="bi bi-mortarboard-fill text-white"></i></span>
+                <span class="brand-font">Campus Portal</span>
+            </a>
+            <button class="navbar-toggler border-0 text-light" type="button" data-bs-toggle="collapse" data-bs-target="#cpNav">
+                <i class="bi bi-list fs-3 text-light"></i>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="cpNav">
+                <ul class="navbar-nav align-items-lg-center gap-lg-1">
+                    <li class="nav-item">
+                        <a class="nav-link cp-nav-link {% block nav_display %}{% endblock %}" href="{% url 'display' %}">
+                            <i class="bi bi-people me-1"></i> Students
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-cp-primary btn-sm ms-lg-2 mt-2 mt-lg-0" href="{% url 'insert' %}">
+                            <i class="bi bi-plus-lg me-1"></i> Add Student
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    {% block content %}
+    {% endblock content %}
+
+    <footer class="cp-footer">
+        Campus Portal &middot; Student Records System
+    </footer>
+
+    <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    {% block extra_js %}{% endblock extra_js %}
+</body>
+</html>
